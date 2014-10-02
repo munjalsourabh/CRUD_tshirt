@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		
+		<link rel="stylesheet" type="text/css" href="CSS/main.css"/>
+		<link rel="stylesheet" type="text/css" href="CSS/normalize.css"/>
+
+		
+	</head>
+	<body>
+		<div ng-app="tShirtApp">
+			<div ng-controller="tShirtController">
+				<table><tr>
+
+					<td><input type="text" placeholder="Model" ng-model="tshirtModel.model"></td>
+					<td><input type="text" placeholder="Price" ng-model="tshirtModel.price"></td>
+					<td><input type="text" placeholder="Style" ng-model="tshirtModel.style"></td>
+					<td><input type="text" placeholder="Color" ng-model="tshirtModel.color"></td>
+					<td><input type="text" placeholder="size" ng-model="tshirtModel.size"></td>
+					
+					<td><button ng-hide="updateFlag" ng-click="saveTs(tshirtModel)">Save</button></td>
+					<td><button ng-hide="!updateFlag" ng-click="updateTs(tshirtModel)">Update</button></td>
+				</tr>
+			</table>
+			<table class="dataTable" cellpadding="10" cellspacing="2px">
+			<tr><th>Model</th><th>Price</th><th>Style</th><th>Color</th><th>Size</th><th>Options</th></tr>
+				<tr ng-repeat="tshirt in tshirts">
+					<td>{{tshirt.model}}</td>
+					<td>{{tshirt.price}}</td>
+					<td>{{tshirt.style}}</td>
+					<td>{{tshirt.color}}</td>
+					<td>{{tshirt.size}}</td>
+					<td><a href="#" ng-click = "deleteTs(tshirt)">Delete </a>|<a href="" ng-click = "updateModel(tshirt)"> Update </a></td>
+					
+				</tr>
+			</table>
+			
+		</div>
+		<div>
+			
+			<script type="text/javascript" src="JS/angular.min.js"></script>
+			<script type="text/javascript" src="JS/main.js"></script>
+		</body>
+	</html>

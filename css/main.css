@@ -1,0 +1,28 @@
+.dataTable{
+	margin-top: 10%;
+	width: 90%;
+	border: 2px solid green ;
+	text-align: center;
+	 border-spacing: 1px;
+    border-collapse: separate;
+}
+.dataTable th{
+	font-size: 20px;
+	font-family: Courier;
+	background-color: rgb(26, 89, 138);
+}
+.dataTable th {
+background-color: rgb(26, 89, 138);
+line-height: 47px;
+color: rgb(224, 235, 227);
+}
+.dataTable tr{
+	line-height: 45px;
+	font-family: Century Gothic;
+}
+.dataTable tr:nth-child(even){
+	background-color: rgb(230, 218, 227);
+}
+.dataTable tr:nth-child(odd){
+	background-color: rgba(193, 179, 214, 0.85);	
+}
