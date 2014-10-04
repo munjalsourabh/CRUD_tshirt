@@ -26,3 +26,15 @@ color: rgb(224, 235, 227);
 .dataTable tr:nth-child(odd){
 	background-color: rgba(193, 179, 214, 0.85);	
 }
+#updateTable{
+	width: 72%;
+	margin: auto;
+	margin-top: 25px;
+}
+#updateTable td{
+
+	padding: 5px
+}
+#mainContainer{
+	text-align: center;
+}
