@@ -1,5 +1,5 @@
 var myApp = angular.module('tShirtApp', []);
-var url = "http://sourabh22.kd.io:8080/tshirt";
+var url = "http://sourabh22.kd.io:8080/tshirt/";
 myApp.factory('Data', function($http) {
     return {
         getTshirts: function() {
