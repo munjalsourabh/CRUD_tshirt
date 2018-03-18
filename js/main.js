@@ -1,59 +1,32 @@
-var myApp = angular.module('tShirtApp', []);
-var url = "http://sourabh22.kd.io:8080/tshirt/";
-myApp.factory('Data', function($http) {
-    return {
-        getTshirts: function() {
-            return $http.get(url);
-        },
-        addTshirts: function(tShirt) {
-            return $http.post(url, tShirt);
-        },
-        deleteTshirt: function(tShirt) {
-            return $http.delete(url + tShirt._id)
-        },
-        updateTshirt: function(tShirt) {
-            return $http.put(url + tShirt._id, tShirt)
-        }
-    };
-});
-myApp.controller("tShirtController", function($scope, Data) {
+var http = require('http');
+var url = require('url');
+// var fetch = require("node-fetch");
 
-    var tshirts = Data.getTshirts();
-    tshirts.then(function(data) {
-        $scope.tshirts = data.data
-    });
+http.createServer(onRequest).listen(8080);
 
-    $scope.getTs = function() {
-        var tshirts = Data.getTshirts();
-        tshirts.then(function(data) {
-            $scope.tshirts = data.data
-        });
-    }
-
-    $scope.deleteTs = function(tshirt) {
-        Data.deleteTshirt(tshirt).then(function() {
-            $scope.getTs();
-        });
-
-    }
-
-    $scope.saveTs = function(tshirtModel) {
-        Data.addTshirts(tshirtModel).then(function() {
-            $scope.tshirtModel = {};
-            $scope.getTs();
-        });
-    }
-    $scope.updateTs = function(tshirtModel) {
-        Data.updateTshirt(tshirtModel).then(function() {
-            $scope.updateFlag = false;
-            $scope.tshirtModel = {};
-            $scope.getTs();
-        })
-
-    }
-    $scope.updateModel = function(tshirtModel) {
-        $scope.updateFlag = true;
-        $scope.tshirtModel = tshirtModel
-
-    }
-});
+function onRequest(client_req, client_res) {
+  var query = url.parse(client_req.url,true).query;
+  console.log('query', query)
+function writeToCLient(res,message){
+ console.log(message);
+  res.statusCode = 200;
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  // res.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
+  // res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Content-Type','application/json');
+  res.end(message);
+}
+message = '';
+  var apiPath = "http://data.nba.net/10s/prod/" + query.apiPath;
+  return http.get(apiPath, function(res){
+      res.on('data',function(data){
+        message += data;
+      });
+      res.on('end',function(){
+           console.log('props called ;)');
+           writeToCLient(client_res, message);
+      });
+ }).on('error', function(e){
+      console.error(e);
+ });
+}
